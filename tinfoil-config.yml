@@ -1,9 +1,8 @@
-shim-version: v0.2.10@sha256:f9040a48106ab06c290fd9b225d4dd53a2daad715c9107594d4310b21592039f
-cvm-version: 0.4.15
+shim-version: v0.3.9@sha256:a45eb01f8e5fa3162b804821d53d8e8667a75940a9c1995f29265347efca8009
+cvm-version: 0.4.16
 cpus: 32
 memory: 524288
 gpus: full
-vllm: false
 
 models:
   - name: "deepseek-r1-0528"
@@ -17,7 +16,7 @@ containers:
       "--runtime", "nvidia",
       "--gpus", "all",
       "--ipc", "host",  
-      "vllm/vllm-openai:v0.11.0@sha256:014a95f21c9edf6abe0aea6b07353f96baa4ec291c427bb1176dc7c93a85845c",
+      "vllm/vllm-openai:v0.14.0@sha256:1d6866b87630d94f5e0cdae55ab5abb4ce0b03fcb84d9d10612f9d518d19d4fd",
       "--model", "/tinfoil/mpk/mpk-1cacd16f763afa07848c18e564b35699aef1530357873bd9ddd483626312b178",
       "--tensor-parallel-size", "8",
       "--max-model-len", "131072",
@@ -32,9 +31,8 @@ containers:
 shim:
   listen-port: 443
   upstream-port: 8001
-  publish-attestation: false
-  tls-challenge: dns  
-  control-plane: https://api.tinfoil.sh
+  authenticated: true
   paths:
     - /v1/chat/completions
     - /metrics
+    - /health
