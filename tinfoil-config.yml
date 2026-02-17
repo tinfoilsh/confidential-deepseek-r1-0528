@@ -1,5 +1,5 @@
-shim-version: v0.3.9@sha256:a45eb01f8e5fa3162b804821d53d8e8667a75940a9c1995f29265347efca8009
-cvm-version: 0.5.17
+shim-version: v0.3.16@sha256:20220be4487f241e7e2a9af6dd576d20ba35d71307bd777c8dba9ba5da03fb38
+cvm-version: 0.6.7
 cpus: 32
 memory: 524288
 gpus: full
@@ -11,12 +11,11 @@ models:
   
 containers:
   - name: "deepseek-r1-0528"
-    image: ""
-    args: [
-      "--runtime", "nvidia",
-      "--gpus", "all",
-      "--ipc", "host",  
-      "vllm/vllm-openai:v0.14.0@sha256:1d6866b87630d94f5e0cdae55ab5abb4ce0b03fcb84d9d10612f9d518d19d4fd",
+    image: "vllm/vllm-openai:v0.14.0@sha256:1d6866b87630d94f5e0cdae55ab5abb4ce0b03fcb84d9d10612f9d518d19d4fd"
+    runtime: nvidia
+    gpus: all
+    ipc: host
+    command: [
       "--model", "/tinfoil/mpk/mpk-1cacd16f763afa07848c18e564b35699aef1530357873bd9ddd483626312b178",
       "--tensor-parallel-size", "8",
       "--max-model-len", "131072",
